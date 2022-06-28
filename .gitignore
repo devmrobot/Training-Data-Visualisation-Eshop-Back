@@ -1,0 +1,6 @@
+node_modules
+.env
+.DS_STORE
+user_save.js
+infatigables_save.sql
+starter_dataset_save.sql
