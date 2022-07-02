@@ -38,8 +38,8 @@ FROM Produits AS p
 INNER JOIN Buy AS b ON p.idProduits=b.produits_id
 WHERE b.buy_afterclic = 1;
 
-SELECT p.marque, SUM(p.price), b.buy_afterclic
+SELECT p.marque, p.article, SUM(p.price), b.buy_afterclic
 FROM Produits AS p
 INNER JOIN Buy AS b ON p.idProduits=b.produits_id
 WHERE b.buy_afterclic = 1
-GROUP BY p.marque;
+GROUP BY p.marque, p.article;
