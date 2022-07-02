@@ -21,7 +21,7 @@ app.use("/api", router);
 
 app.get("/", (req,res) => {
 
-    res.send("Welcome on Infatigables's API");
+    res.send("Welcome at enooco");
 
 })
 
