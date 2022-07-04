@@ -30,12 +30,12 @@ module.exports = router;
 
 // CA GLOBAL
 SELECT SUM(p.price), SUM(b.buy_afterclic)
-FROM Produits AS p
-INNER JOIN Buy AS b ON p.idProduits=b.produits_id
+FROM products AS p
+INNER JOIN Buy AS b ON p.idProducts=b.products_id
 WHERE b.buy_afterclic = 1;
 
 // DUREE CONSULTATION MOYENNE
-SELECT AVG(b.duree_consultation)
+SELECT AVG(b.time_spent)
 FROM buy AS b;
 
 // NOMBRE DE COMMANDES
@@ -44,41 +44,35 @@ FROM buy AS b
 WHERE b.buy_afterclic = 1;
 
 // TX DE CONVERSION COMMANDES ((Nombre total de commandes passées/ Total des visites) * 100)
-SELECT b.buy_afterclic / COUNT(b.date_clic)
-FROM buy AS b
-WHERE b.buy_afterclic = 1;
-
-// TX DE CONVERSION COMMANDES ((Nombre total de commandes passées/ Total des visites) * 100)
 SELECT COUNT(b.buy_afterclic)*100.0/(SELECT COUNT(*) FROM buy)
 FROM buy AS b
 WHERE b.buy_afterclic = 1;
 
-
 // MARQUE & ARTICLES COMMANDEES
-SELECT p.marque, p.price, p.article, b.buy_afterclic
-FROM Produits AS p
-INNER JOIN Buy AS b ON p.idProduits=b.produits_id
+SELECT p.brand, p.price, p.article, b.buy_afterclic
+FROM products AS p
+INNER JOIN Buy AS b ON p.idProducts=b.products_id
 WHERE b.buy_afterclic = 1;
 
 // CA PAR MARQUE
-SELECT p.marque, p.article, SUM(p.price), b.buy_afterclic
-FROM Produits AS p
-INNER JOIN Buy AS b ON p.idProduits=b.produits_id
+SELECT p.brand, p.article, SUM(p.price), b.buy_afterclic
+FROM products AS p
+INNER JOIN buy AS b ON p.idProducts=b.products_id
 WHERE b.buy_afterclic = 1
-GROUP BY p.marque, p.article;
+GROUP BY p.brand, p.article;
 
 // CA PAR VISITEURS
-SELECT v.nom, v.prénom, b.buy_afterclic, SUM(p.price)
-FROM Visiteurs AS v
-INNER JOIN Buy AS b ON v.idVisiteurs=b.visiteurs_id
-INNER JOIN Produits As p ON b.produits_id=p.idProduits
+SELECT v.firstname, v.lastname, b.buy_afterclic, SUM(p.price)
+FROM visitors AS v
+INNER JOIN buy AS b ON v.idVisitors=b.visitors_id
+INNER JOIN products As p ON b.products_id=p.idProducts
 WHERE b.buy_afterclic = 1
-GROUP BY v.nom, v.prénom;
+GROUP BY v.firstname, v.lastname;
 
 // CA & TYPOLOGIE PAR VISITEURS
-SELECT v.nom, v.prénom, b.buy_afterclic, SUM(p.price), p.marque, p.article
-FROM Visiteurs AS v
-INNER JOIN Buy AS b ON v.idVisiteurs=b.visiteurs_id
-INNER JOIN Produits As p ON b.produits_id=p.idProduits
+SELECT v.firstname, v.lastname, b.buy_afterclic, SUM(p.price), p.brand, p.article
+FROM visitors AS v
+INNER JOIN buy AS b ON v.idVisitors=b.visitors_id
+INNER JOIN products As p ON b.products_id=p.idProducts
 WHERE b.buy_afterclic = 1
-GROUP BY v.nom, v.prénom, p.marque, p.article;
+GROUP BY v.firstname, v.lastname, p.brand, p.article;
