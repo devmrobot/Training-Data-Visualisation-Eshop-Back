@@ -1,8 +1,9 @@
 require('dotenv').config();
 const connection = require("./db-config");
 const express = require("express");
+const cors = require("cors");
 const app = express();
-const router = require('./route/index.routes');
+const router = require('./routes/index.routes');
 
 const port = process.env.PORT || 8000;
 
@@ -16,13 +17,11 @@ connection.connect((err) => {
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
-
+app.use(cors());
 app.use("/api", router);
 
 app.get("/", (req,res) => {
-
     res.send("Welcome at enooco");
-
 })
 
 app.listen(port, () => {
@@ -30,3 +29,6 @@ app.listen(port, () => {
 })
 
 module.exports = app;
+
+//c'est quoi déjà l'interet de /api dans app.js
+//npm cors à installer ?
