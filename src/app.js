@@ -29,6 +29,3 @@ app.listen(port, () => {
 })
 
 module.exports = app;
-
-// c'est quoi déjà l'interet de /api dans app.js
-// laisser le .sql sur github ?
