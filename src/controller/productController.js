@@ -7,7 +7,7 @@ const {
     findCaByBrand
 } = require('../model/productModel');
 
-
+// MAIN ROUTE
 const getAllProduct = async (req, res) => {
     try {
       const result = await findAllProduct();
@@ -17,6 +17,7 @@ const getAllProduct = async (req, res) => {
     }
 };
 
+// GLOBAL CA
 const getGlobalCaProduct = async (req, res) => {
     try {
       const result = await findGlobalCaProduct();
@@ -26,6 +27,7 @@ const getGlobalCaProduct = async (req, res) => {
     }
 };
 
+// NUMBER OF ORDERS
 const getNumberOfOrders = async (req, res) => {
     try {
       const result = await findNumberOfOrders();
@@ -35,6 +37,7 @@ const getNumberOfOrders = async (req, res) => {
     }
 };
 
+// ORDER CONVERSION RATE
 const getOrderConversionRate = async (req, res) => {
     try {
       const result = await findOrderConversionRate();
@@ -44,6 +47,7 @@ const getOrderConversionRate = async (req, res) => {
     }
 };
 
+// BRAND AND ARTICLE ORDERED
 const getBrandAndArticleOrdered = async (req, res) => {
     try {
       const result = await findBrandAndArticleOrdered();
@@ -53,6 +57,7 @@ const getBrandAndArticleOrdered = async (req, res) => {
     }
 };
 
+// CA BY BRAND
 const getCaByBrand = async (req, res) => {
     try {
       const result = await findCaByBrand();
@@ -70,4 +75,3 @@ module.exports = {
     getBrandAndArticleOrdered,
     getCaByBrand
 };
-

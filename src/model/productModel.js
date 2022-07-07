@@ -20,7 +20,7 @@ const findNumberOfOrders = async () => {
 
 // ORDER CONVERSION RATE
 const findOrderConversionRate = async () => {
-    const result = await connection.promise().query("SELECT COUNT(b.buy_afterclic)*100.0/(SELECT COUNT(*) FROM buy) FROM buy AS b WHERE b.buy_afterclic = 1;");
+    const result = await connection.promise().query("SELECT CAST((COUNT(b.buy_afterclic)*100.0/(SELECT COUNT(*) FROM buy)) AS DECIMAL(8,2)) AS duration FROM buy AS b WHERE b.buy_afterclic = 1;");
     return result[0];
 };
 
