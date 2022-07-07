@@ -11,8 +11,8 @@
 // WHERE b.buy_afterclic = 1;
 
 
-// // TX DE CONVERSION COMMANDES ((Nombre total de commandes passées/ Total des visites) * 100)
-// SELECT COUNT(b.buy_afterclic)*100.0/(SELECT COUNT(*) FROM buy) FROM buy AS b WHERE b.buy_afterclic = 1;
+// // TX DE CONVERSION COMMANDES ((Nombre total de commandes passées/ Total des visites) * 100) avec deux decimals après la virgule
+// SELECT CAST((COUNT(b.buy_afterclic)*100.0/(SELECT COUNT(*) FROM buy)) AS DECIMAL(8,2)) AS duration FROM buy AS b WHERE b.buy_afterclic = 1;
 
 
 // // MARQUE & ARTICLES COMMANDEES
