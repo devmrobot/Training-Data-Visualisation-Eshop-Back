@@ -8,13 +8,13 @@ const findAllProduct = async () => {
 
 // GLOBAL CA
 const findGlobalCaProduct = async () => {
-    const result = await connection.promise().query("SELECT SUM(p.price), SUM(b.buy_afterclic) FROM product AS p INNER JOIN Buy AS b ON p.idProduct=b.product_id WHERE b.buy_afterclic = 1;");
+    const result = await connection.promise().query("SELECT SUM(p.price) AS total, SUM(b.buy_afterclic) FROM product AS p INNER JOIN Buy AS b ON p.idProduct=b.product_id WHERE b.buy_afterclic = 1;");
     return result[0];
 };
 
 // NUMBER OF ORDERS
 const findNumberOfOrders = async () => {
-    const result = await connection.promise().query("SELECT SUM(b.buy_afterclic) FROM buy AS b WHERE b.buy_afterclic = 1;");
+    const result = await connection.promise().query("SELECT SUM(b.buy_afterclic) AS orders FROM buy AS b WHERE b.buy_afterclic = 1;");
     return result[0];
 };
 
@@ -32,9 +32,11 @@ const findBrandAndArticleOrdered = async () => {
 
 // CA BY BRAND
 const findCaByBrand = async () => {
-    const result = await connection.promise().query("SELECT p.brand, p.article, SUM(p.price), b.buy_afterclic FROM product AS p INNER JOIN buy AS b ON p.idProduct=b.product_id WHERE b.buy_afterclic = 1 GROUP BY p.brand, p.article;");
+    const result = await connection.promise().query("SELECT p.brand, SUM(p.price) AS price, b.buy_afterclic FROM product AS p INNER JOIN buy AS b ON p.idProduct=b.product_id WHERE b.buy_afterclic = 1 GROUP BY p.brand;");
     return result[0];
 };
+
+//SELECT p.brand, p.article, SUM(p.price) AS price, b.buy_afterclic FROM product AS p INNER JOIN buy AS b ON p.idProduct=b.product_id WHERE b.buy_afterclic = 1 GROUP BY p.brand, p.article;
 
 module.exports = {
     findAllProduct,
@@ -44,3 +46,4 @@ module.exports = {
     findBrandAndArticleOrdered,
     findCaByBrand
 };
+
