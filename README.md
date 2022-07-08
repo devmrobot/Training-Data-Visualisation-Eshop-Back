@@ -14,8 +14,7 @@ Développer en React, utiliser les libraires que vous souhaitez (exemple chartjs
 
 ## 🏗️ Built with
 
--   [React]
--   [Chart.js]
+-   [MySQL]
 
 ## 👤 Authors
 
